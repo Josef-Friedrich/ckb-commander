@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ckb-next-desktop-indicator"
+version = "0.1.0"
+description = "Small script that displays on a keyboard using the ckb-next daemon which desktop (no 0, 1, 2, ...) you are on. "
+authors = ["Josef Friedrich <josef@friedrich.rocks>"]
+readme = "README.rst"
+repository = "https://github.com/Josef-Friedrich/python-project-boilerplate"
+license = "MIT"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+ewmh = "^0.1.6"
+
+[build-system]
+requires = ["poetry>=1.2.0b2"]
+build-backend = "poetry.masonry.api"
