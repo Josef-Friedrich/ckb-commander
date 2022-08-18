@@ -37,6 +37,13 @@ def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
         }
     )
 
+    pipe.set_rgb(
+        {
+            "lwin": COLORS[1],
+            "lshift": COLORS[1],
+        }
+    )
+
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments."""
@@ -61,13 +68,6 @@ def main() -> NoReturn:
 
     old_display_id: int = 0
     display_id: int = 0
-
-    pipe.set_rgb(
-        {
-            "lwin": COLORS[1],
-            "lshift": COLORS[1],
-        }
-    )
 
     highlight_current_workspace(pipe, display_id)
 
