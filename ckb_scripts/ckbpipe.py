@@ -158,7 +158,9 @@ class CKBPipe:
         Set colors for keys. Pass a dictionary of `'keyname': 'RRGGBBAA'`.
         See ALL_LEDS for the key names that can be used.
         """
-        with open(self.filename, "w") as f:
-            for (key, value) in color_mapping.items():
-                print(key, value)
-                f.write("rgb " + key + ":" + value + "\n")
+        try:
+            with open(self.filename, "w") as f:
+                for (key, value) in color_mapping.items():
+                    f.write("rgb " + key + ":" + value + "\n")
+        except IOError:
+            print(f"Error while opening or writing to pipe: " + self.filename + "\n")
