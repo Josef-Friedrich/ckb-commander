@@ -127,10 +127,21 @@ category = "dev"
 optional = false
 python-versions = ">=3.7"
 
+[[package]]
+name = "xlib"
+version = "0.21"
+description = "Python X Library"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.10.0"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "329f3eab7309af6b1c1b4b9b2b6301207ec86d07f83a4dc3e8e7ef0a7a9eb8b0"
+content-hash = "6b4e195393af497ca279f5fd5cfea1c9946795cd8cd45cfbc8d282a8e34e8129"
 
 [metadata.files]
 black = []
@@ -145,3 +156,4 @@ python-xlib = []
 six = []
 tomli = []
 typing-extensions = []
+xlib = []

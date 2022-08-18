@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ckb-next-desktop-indicator"
+name = "ckb_scripts"
 version = "0.1.0"
 description = "Small script that displays on a keyboard using the ckb-next daemon which desktop (no 0, 1, 2, ...) you are on. "
 authors = ["Josef Friedrich <josef@friedrich.rocks>"]
@@ -21,3 +21,6 @@ isort = "^5.10.1"
 [build-system]
 requires = ["poetry>=1.2.0b2"]
 build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+"workspace-indicator.py" = "ckb_scripts.workspace_indicator:main"
