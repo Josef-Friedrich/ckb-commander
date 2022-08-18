@@ -4,7 +4,10 @@
 
 import time
 from ewmh.ewmh import EWMH
+
 ewmh = EWMH()
+
+DEVICE = "/dev/input/ckb1/cmd"
 
 print(ewmh.getCurrentDesktop())
 
@@ -12,10 +15,12 @@ print(ewmh.getCurrentDesktop())
 # { "pgdn",           78, KEY_PAGEDOWN },
 
 
-with open('/dev/input/ckb1/cmd', 'w') as f:
-    f.write('rgb ff0000\n')
+def send_command(command: str) -> None:
+    with open(DEVICE, "w") as f:
+        f.write(command + "\n")
+
 
 time.sleep(1)
 
-with open('/dev/input/ckb1/cmd', 'w') as f:
-    f.write('rgb 0000ff\n')
+with open("/dev/input/ckb1/cmd", "w") as f:
+    f.write("rgb 0000ff\n")
