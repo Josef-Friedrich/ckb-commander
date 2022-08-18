@@ -76,7 +76,7 @@ def main() -> NoReturn:
         if old_display_id != display_id:
             highlight_current_workspace(pipe, display_id)
             old_display_id: int = display_id
-            time.sleep(0.1)
+        time.sleep(0.5)
 
 
 if __name__ == "__main__":
