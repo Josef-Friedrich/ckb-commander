@@ -28,6 +28,7 @@ def get_current_workspace() -> int:
 
 
 def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
+    print("Set colors to workspace{}".format(desktop_id + 1))
     pipe.set_rgb({key: COLORS[desktop_id == i] for (i, key) in enumerate(KEYS)})
     pipe.set_rgb(
         {
