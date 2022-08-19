@@ -2,7 +2,9 @@
 
 # https://github.com/ckb-next/ckb-next/wiki/CKB-Daemon-Manual
 
-# https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/xwsmon-ckb.py
+"""
+Based on https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/xwsmon-ckb.py
+"""
 
 import argparse
 import time
@@ -11,6 +13,8 @@ from ewmh.ewmh import EWMH
 from .ckbpipe import CKBPipe
 
 ewmh = EWMH()
+
+REFRESH_RATE: float = 0.1
 
 
 # Names of keys to highlight for workspaces.
@@ -28,7 +32,7 @@ def get_current_workspace() -> int:
 
 
 def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
-    print("Set colors to workspace{}".format(desktop_id + 1))
+    print("Highlight the workspace {}".format(desktop_id + 1))
     pipe.set_rgb({key: COLORS[desktop_id == i] for (i, key) in enumerate(KEYS)})
     pipe.set_rgb(
         {
@@ -55,7 +59,7 @@ def parse_args() -> argparse.Namespace:
         "--ckb-pipe",
         "-c",
         required=True,
-        help="The ckb-pipe-socket (/dev/input/ckb1/cmd)",
+        help="The ckb-pipe-socket (e. g. /dev/input/ckb1/cmd)",
     )
 
     return parser.parse_args()
@@ -76,7 +80,7 @@ def main() -> NoReturn:
         if old_display_id != display_id:
             highlight_current_workspace(pipe, display_id)
             old_display_id: int = display_id
-        time.sleep(0.5)
+        time.sleep(REFRESH_RATE)
 
 
 if __name__ == "__main__":
