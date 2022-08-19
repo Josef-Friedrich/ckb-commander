@@ -23,4 +23,4 @@ requires = ["poetry>=1.2.0b2"]
 build-backend = "poetry.masonry.api"
 
 [tool.poetry.scripts]
-"workspace-indicator.py" = "ckb_scripts.workspace_indicator:main"
+"ckb-controller.py" = "ckb_scripts.cli:main"

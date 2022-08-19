@@ -6,7 +6,6 @@
 Based on https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/xwsmon-ckb.py
 """
 
-import argparse
 import time
 from typing import NoReturn
 from ewmh.ewmh import EWMH
@@ -49,29 +48,12 @@ def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
     )
 
 
-def parse_args() -> argparse.Namespace:
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(
-        description="Workspace switch monitor for ckb-next"
-    )
-
-    parser.add_argument(
-        "--ckb-pipe",
-        "-c",
-        required=True,
-        help="The ckb-pipe-socket (e. g. /dev/input/ckb1/cmd)",
-    )
-
-    return parser.parse_args()
-
-
-def main() -> NoReturn:
-    args: argparse.Namespace = parse_args()
-
-    pipe: CKBPipe = CKBPipe(args.ckb_pipe)
-
+def monitor_workspaces(pipe: CKBPipe) -> NoReturn:
     old_display_id: int = 0
     display_id: int = 0
+
+    pipe.activate()
+    pipe.switch_mode(1)
 
     highlight_current_workspace(pipe, display_id)
 
@@ -81,7 +63,3 @@ def main() -> NoReturn:
             highlight_current_workspace(pipe, display_id)
             old_display_id: int = display_id
         time.sleep(REFRESH_RATE)
-
-
-if __name__ == "__main__":
-    main()
