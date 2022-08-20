@@ -1,5 +1,7 @@
 # https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/ckbpipe.py
 
+from .colors import colors
+
 
 class CKBPipe:
     """Interface to ckb-next 'pipe' animation."""
@@ -32,17 +34,15 @@ class CKBPipe:
     def switch_mode(self, number: int) -> None:
         self.send_command("mode {} switch".format(number))
 
-    def set_rgb(self, rgb: str, key: str | None = None) -> None:
-        rgb = rgb.replace("#", "")
+    def set_color(self, color: str, key: str | None = None) -> None:
+        if color in colors:
+            color = colors[color]
+        color = color.replace("#", "")
         key_insert = ""
         if key != None:
             key_insert = key_insert + ":"
-        self.send_command("rgb " + key_insert + rgb)
+        self.send_command("rgb " + key_insert + color)
 
-    def set_rgb_key_mapping(self, color_mapping: dict[str, str]) -> None:
-        """
-        Set colors for keys. Pass a dictionary of `'keyname': 'RRGGBBAA'`.
-        See ALL_LEDS for the key names that can be used.
-        """
-        for (key, value) in color_mapping.items():
-            self.send_command("rgb " + key + ":" + value)
+    def set_color_key_mapping(self, color_mapping: dict[str, str]) -> None:
+        for (key, color) in color_mapping.items():
+            self.set_color(key, color)
