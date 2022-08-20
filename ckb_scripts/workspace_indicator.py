@@ -32,15 +32,15 @@ def get_current_workspace() -> int:
 
 def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
     print("Highlight the workspace {}".format(desktop_id + 1))
-    pipe.set_rgb({key: COLORS[desktop_id == i] for (i, key) in enumerate(KEYS)})
-    pipe.set_rgb(
+    pipe.set_rgb_key_mapping({key: COLORS[desktop_id == i] for (i, key) in enumerate(KEYS)})
+    pipe.set_rgb_key_mapping(
         {
             "del": COLORS[desktop_id != 0],
             "pgdn": COLORS[desktop_id != 3],
         }
     )
 
-    pipe.set_rgb(
+    pipe.set_rgb_key_mapping(
         {
             "lwin": COLORS[1],
             "lshift": COLORS[1],

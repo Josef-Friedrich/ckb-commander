@@ -13,6 +13,8 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 ewmh = "^0.1.6"
+webcolors = "^1.12"
+click = "^8.1.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.6.0"

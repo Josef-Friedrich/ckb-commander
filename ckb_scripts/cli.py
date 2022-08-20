@@ -1,46 +1,53 @@
-import argparse
-
+from typing import NoReturn
+import click
 
 from .ckbpipe import CKBPipe
 from .workspace_indicator import monitor_workspaces
+from .colors import print_colors, set_colors
 
-
-def parse_args() -> argparse.Namespace:
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Control the ckb-next-daemon")
-
-    parser.add_argument(
-        "--pipe",
-        "-p",
-        required=True,
-        help="The ckb pipe socket (e. g. /dev/input/ckb1/cmd)",
-    )
-
-    parser.add_argument("--activate", "-1", action="store_true")
-    parser.add_argument("--deactivate", "-0", action="store_true")
-    parser.add_argument("--switch-mode", "-m")
-    parser.add_argument(
-        "--workspace-indicator",
-        "-w",
-        action="store_true",
-        help="Workspace (virtual desktops) switch monitor",
-    )
-
-    return parser.parse_args()
+pipe: CKBPipe
 
 
 def main() -> None:
-    args: argparse.Namespace = parse_args()
+    @click.group()
+    @click.option(
+        "--pipe",
+        "-p",
+        "pipePath",
+        required=True,
+        type=str,
+        help="The ckb pipe socket (e. g. /dev/input/ckb1/cmd)",
+    )
+    def cli(pipePath: str) -> None:
+        "Control the ckb-next-daemon"
+        global pipe
+        pipe = CKBPipe(pipePath)
 
-    pipe: CKBPipe = CKBPipe(args.pipe)
-
-    if args.activate:
+    @cli.command()
+    def activate() -> None:
         pipe.activate()
-    elif args.deactivate:
+
+    @cli.command()
+    def deactivate() -> None:
         pipe.deactivate()
-    elif args.switch_mode:
-        pipe.switch_mode(args.switch_mode)
-    elif args.workspace_indicator:
+
+    @cli.command()
+    def switch_mode() -> None:
+        pipe.switch_mode(1)
+
+    @cli.command()
+    def indicate_workspace() -> NoReturn:
+        "Workspace (virtual desktops) switch monitor"
         monitor_workspaces(pipe)
 
-    print(args)
+    @cli.command()
+    def show_color_names()  -> None:
+        "Print all color names to stdout"
+        print_colors()
+
+    @cli.command()
+    def set_all_colors() -> None:
+        "Set all keys to the same color. Loop through all colors."
+        set_colors(pipe)
+
+    cli()
