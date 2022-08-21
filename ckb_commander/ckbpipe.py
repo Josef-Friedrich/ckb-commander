@@ -40,9 +40,9 @@ class CKBPipe:
         color = color.replace("#", "")
         key_insert = ""
         if key != None:
-            key_insert = key_insert + ":"
+            key_insert = key + ":"
         self.send_command("rgb " + key_insert + color)
 
     def set_color_key_mapping(self, color_mapping: dict[str, str]) -> None:
         for (key, color) in color_mapping.items():
-            self.set_color(key, color)
+            self.set_color(color, key)
