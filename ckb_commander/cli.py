@@ -57,6 +57,7 @@ def cli(pipePath: str) -> None:
 @click.option(
     "--activate",
     "-1",
+    help="When plugged in, all devices start in hardware-controlled mode (also known as idle mode) and will not respond to commands. Use this option to activate the device.",
     type=str,
     callback=activate,
     is_flag=True,
@@ -65,6 +66,7 @@ def cli(pipePath: str) -> None:
 @click.option(
     "--deactivate",
     "-0",
+    help="To put the device back into hardware mode, use this option.",
     type=str,
     callback=deactivate,
     is_flag=True,
