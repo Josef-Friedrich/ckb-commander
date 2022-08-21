@@ -17,7 +17,7 @@ def set_color(ctx: Context, param: Option, color: str) -> None:
     if not color:
         return
     print("Set color " + color)
-    pipe.set_color(color)
+    pipe.set_color_by_command_string(color)
 
 
 def activate(ctx: Context, param: Option, flag: bool) -> None:
@@ -76,7 +76,7 @@ def cli(pipePath: str) -> None:
     "--color",
     "-c",
     type=str,
-    help="A color name or a RGB value in hex format.",
+    help="Set the backlight of a single key, of selected keys or of the entire keyboard to the specified color. A color name or a RGB value in hex format.",
     callback=set_color,
     expose_value=False,
 )
@@ -96,15 +96,20 @@ def control() -> None:
 def switch_mode() -> None:
     pipe.switch_mode(1)
 
+@cli.group()
+def color() -> None:
+    "Show informations about the available color names"
+    pass
 
-@cli.command()
-def show_color_names() -> None:
-    "Print all color names to stdout"
+
+@color.command()
+def name() -> None:
+    """Show all color names"""
     print_colors()
 
 
-@cli.command()
-def set_all_colors() -> None:
+@color.command()
+def set() -> None:
     "Set all keys to the same color. Loop through all colors."
     set_colors(pipe)
 
