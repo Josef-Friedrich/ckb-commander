@@ -3,21 +3,7 @@ ckb-commander
 
 Control your Corsair keyboard via the ckb-next-daemon.
 
-:: 
-
-    Usage: ckb-commander.py [OPTIONS] COMMAND [ARGS]...
-
-      Control the ckb-next-daemon
-
-    Options:
-      -p, --pipe TEXT  The ckb pipe socket (e. g. /dev/input/ckb1/cmd)  [required]
-      --help           Show this message and exit.
-
-    Commands:
-      control
-      set-all-colors    Set all keys to the same color.
-      show-color-names  Print all color names to stdout
-      switch-mode
+{{ cli('ckb-commander.py --help') | literal }}
 
 workspace-indicator.py
 ----------------------
