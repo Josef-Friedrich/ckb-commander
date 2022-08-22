@@ -10,6 +10,7 @@ See the freedesktop.org `specification
 <http://standards.freedesktop.org/wm-spec/wm-spec-latest.html>`_ for more
 information.
 """
+
 class EWMH:
     """
     This class provides the ability to get and set properties defined by the
@@ -36,28 +37,25 @@ class EWMH:
     :param root: the root window to use. If not given,
                      self.display.screen().root is used.
     """
+
     NET_WM_WINDOW_TYPES = ...
     NET_WM_ACTIONS = ...
     NET_WM_STATES = ...
-    def __init__(self, _display=..., root=...) -> None:
-        ...
-
-    def setNumberOfDesktops(self, nb): # -> None:
+    def __init__(self, _display=..., root=...) -> None: ...
+    def setNumberOfDesktops(self, nb):  # -> None:
         """
         Set the number of desktops (property _NET_NUMBER_OF_DESKTOPS).
 
         :param nb: the number of desired desktops"""
         ...
-
-    def setDesktopGeometry(self, w, h): # -> None:
+    def setDesktopGeometry(self, w, h):  # -> None:
         """
         Set the desktop geometry (property _NET_DESKTOP_GEOMETRY)
 
         :param w: desktop width
         :param h: desktop height"""
         ...
-
-    def setDesktopViewport(self, w, h): # -> None:
+    def setDesktopViewport(self, w, h):  # -> None:
         """
         Set the viewport size of the current desktop
         (property _NET_DESKTOP_VIEWPORT)
@@ -65,52 +63,45 @@ class EWMH:
         :param w: desktop width
         :param h: desktop height"""
         ...
-
-    def setCurrentDesktop(self, i): # -> None:
+    def setCurrentDesktop(self, i):  # -> None:
         """
         Set the current desktop (property _NET_CURRENT_DESKTOP).
 
         :param i: the desired desktop number"""
         ...
-
-    def setActiveWindow(self, win): # -> None:
+    def setActiveWindow(self, win):  # -> None:
         """
         Set the given window active (property _NET_ACTIVE_WINDOW)
 
         :param win: the window object"""
         ...
-
-    def setShowingDesktop(self, show): # -> None:
+    def setShowingDesktop(self, show):  # -> None:
         """
         Set/unset the mode Showing desktop (property _NET_SHOWING_DESKTOP)
 
         :param show: 1 to set the desktop mode, else 0"""
         ...
-
-    def setCloseWindow(self, win): # -> None:
+    def setCloseWindow(self, win):  # -> None:
         """
         Close the given window (property _NET_CLOSE_WINDOW)
 
         :param win: the window object"""
         ...
-
-    def setWmName(self, win, name): # -> None:
+    def setWmName(self, win, name):  # -> None:
         """
         Set the property _NET_WM_NAME
 
         :param win: the window object
         :param name: desired name"""
         ...
-
-    def setWmVisibleName(self, win, name): # -> None:
+    def setWmVisibleName(self, win, name):  # -> None:
         """
         Set the property _NET_WM_VISIBLE_NAME
 
         :param win: the window object
         :param name: desired visible name"""
         ...
-
-    def setWmDesktop(self, win, i): # -> None:
+    def setWmDesktop(self, win, i):  # -> None:
         """
         Move the window to the desired desktop by changing the property
         _NET_WM_DESKTOP.
@@ -119,8 +110,9 @@ class EWMH:
         :param i: desired desktop number
         """
         ...
-
-    def setMoveResizeWindow(self, win, gravity=..., x=..., y=..., w=..., h=...): # -> None:
+    def setMoveResizeWindow(
+        self, win, gravity=..., x=..., y=..., w=..., h=...
+    ):  # -> None:
         """
         Set the property _NET_MOVERESIZE_WINDOW to move or resize the given
         window. Flags are automatically calculated if x, y, w or h are defined.
@@ -133,8 +125,7 @@ class EWMH:
         :param h: int or None
         """
         ...
-
-    def setWmState(self, win, action, state, state2=...): # -> None:
+    def setWmState(self, win, action, state, state2=...):  # -> None:
         """
         Set/unset one or two state(s) for the given window (property
         _NET_WM_STATE).
@@ -147,8 +138,9 @@ class EWMH:
         :type state2: int or str (see :attr:`NET_WM_STATES`)
         """
         ...
-
-    def getClientList(self): # -> list[Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None]:
+    def getClientList(
+        self,
+    ):  # -> list[Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None]:
         """
         Get the list of windows maintained by the window manager for the
         property _NET_CLIENT_LIST.
@@ -156,31 +148,29 @@ class EWMH:
         :return: list of Window objects
         """
         ...
-
-    def getClientListStacking(self): # -> list[Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None]:
+    def getClientListStacking(
+        self,
+    ):  # -> list[Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None]:
         """
         Get the list of windows maintained by the window manager for the
         property _NET_CLIENT_LIST_STACKING.
 
         :return: list of Window objects"""
         ...
-
     def getNumberOfDesktops(self):
         """
         Get the number of desktops (property _NET_NUMBER_OF_DESKTOPS).
 
         :return: int"""
         ...
-
-    def getDesktopGeometry(self): # -> None:
+    def getDesktopGeometry(self):  # -> None:
         """
         Get the desktop geometry (property _NET_DESKTOP_GEOMETRY) as an array
         of two integers [width, height].
 
         :return: [int, int]"""
         ...
-
-    def getDesktopViewPort(self): # -> None:
+    def getDesktopViewPort(self):  # -> None:
         """
         Get the current viewports of each desktop as a list of [x, y]
         representing the top left corner (property _NET_DESKTOP_VIEWPORT).
@@ -188,7 +178,6 @@ class EWMH:
         :return: list of [int, int]
         """
         ...
-
     def getCurrentDesktop(self) -> int:
         """
         Get the current desktop number (property _NET_CURRENT_DESKTOP)
@@ -196,8 +185,9 @@ class EWMH:
         :return: int
         """
         ...
-
-    def getActiveWindow(self): # -> Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None:
+    def getActiveWindow(
+        self,
+    ):  # -> Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None:
         """
         Get the current active (toplevel) window or None (property
         _NET_ACTIVE_WINDOW)
@@ -205,8 +195,7 @@ class EWMH:
         :return: Window object or None
         """
         ...
-
-    def getWorkArea(self): # -> None:
+    def getWorkArea(self):  # -> None:
         """
         Get the work area for each desktop (property _NET_WORKAREA) as a list
         of [x, y, width, height]
@@ -214,7 +203,6 @@ class EWMH:
         :return: a list of [int, int, int, int]
         """
         ...
-
     def getShowingDesktop(self):
         """
         Get the value of "showing the desktop" mode of the window manager
@@ -224,8 +212,7 @@ class EWMH:
         :return: int
         """
         ...
-
-    def getWmName(self, win): # -> None:
+    def getWmName(self, win):  # -> None:
         """
         Get the property _NET_WM_NAME for the given window as a string.
 
@@ -233,8 +220,7 @@ class EWMH:
         :return: str
         """
         ...
-
-    def getWmVisibleName(self, win): # -> None:
+    def getWmVisibleName(self, win):  # -> None:
         """
         Get the property _NET_WM_VISIBLE_NAME for the given window as a string.
 
@@ -242,7 +228,6 @@ class EWMH:
         :return: str
         """
         ...
-
     def getWmDesktop(self, win):
         """
         Get the current desktop number of the given window (property
@@ -252,8 +237,7 @@ class EWMH:
         :return: int
         """
         ...
-
-    def getWmWindowType(self, win, str=...): # -> list[Unknown | str]:
+    def getWmWindowType(self, win, str=...):  # -> list[Unknown | str]:
         """
         Get the list of window types of the given window (property
         _NET_WM_WINDOW_TYPE).
@@ -263,8 +247,7 @@ class EWMH:
         :return: list of (int|str)
         """
         ...
-
-    def getWmState(self, win, str=...): # -> list[Unknown | str]:
+    def getWmState(self, win, str=...):  # -> list[Unknown | str]:
         """
         Get the list of states of the given window (property _NET_WM_STATE).
 
@@ -273,8 +256,7 @@ class EWMH:
         :return: list of (int|str)
         """
         ...
-
-    def getWmAllowedActions(self, win, str=...): # -> list[Unknown | str]:
+    def getWmAllowedActions(self, win, str=...):  # -> list[Unknown | str]:
         """
         Get the list of allowed actions for the given window (property
         _NET_WM_ALLOWED_ACTIONS).
@@ -284,7 +266,6 @@ class EWMH:
         :return: list of (int|str)
         """
         ...
-
     def getWmPid(self, win):
         """
         Get the pid of the application associated to the given window (property
@@ -293,26 +274,26 @@ class EWMH:
         :param win: the window object
         """
         ...
-
-    def getReadableProperties(self): # -> dict_keys[str, (() -> list[Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None]) | (() -> Unknown) | (() -> (Unknown | None)) | (() -> (Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None)) | ((win: Unknown) -> (Unknown | None)) | ((win: Unknown) -> Unknown) | ((win: Unknown, str: bool = False) -> (Unknown | list[Unknown | str]))]:
+    def getReadableProperties(
+        self,
+    ):  # -> dict_keys[str, (() -> list[Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None]) | (() -> Unknown) | (() -> (Unknown | None)) | (() -> (Unknown | Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None)) | ((win: Unknown) -> (Unknown | None)) | ((win: Unknown) -> Unknown) | ((win: Unknown, str: bool = False) -> (Unknown | list[Unknown | str]))]:
         """
         Get all the readable properties' names
         """
         ...
-
-    def getProperty(self, prop, *args, **kwargs): # -> list[Unknown | str] | None:
+    def getProperty(self, prop, *args, **kwargs):  # -> list[Unknown | str] | None:
         """
         Get the value of a property. See the corresponding method for the
         required arguments.  For example, for the property _NET_WM_STATE, look
         for :meth:`getWmState`
         """
         ...
-
-    def getWritableProperties(self): # -> dict_keys[str, ((nb: Unknown) -> None) | ((w: Unknown, h: Unknown) -> None) | ((i: Unknown) -> None) | ((win: Unknown) -> None) | ((show: Unknown) -> None) | ((win: Unknown, gravity: int = 0, x: Unknown | None = None, y: Unknown | None = None, w: Unknown | None = None, h: Unknown | None = None) -> None) | ((win: Unknown, name: Unknown) -> None) | ((win: Unknown, i: Unknown) -> None) | ((win: Unknown, action: Unknown, state: Unknown, state2: int = 0) -> None)]:
+    def getWritableProperties(
+        self,
+    ):  # -> dict_keys[str, ((nb: Unknown) -> None) | ((w: Unknown, h: Unknown) -> None) | ((i: Unknown) -> None) | ((win: Unknown) -> None) | ((show: Unknown) -> None) | ((win: Unknown, gravity: int = 0, x: Unknown | None = None, y: Unknown | None = None, w: Unknown | None = None, h: Unknown | None = None) -> None) | ((win: Unknown, name: Unknown) -> None) | ((win: Unknown, i: Unknown) -> None) | ((win: Unknown, action: Unknown, state: Unknown, state2: int = 0) -> None)]:
         """Get all the writable properties names"""
         ...
-
-    def setProperty(self, prop, *args, **kwargs): # -> None:
+    def setProperty(self, prop, *args, **kwargs):  # -> None:
         """
         Set the value of a property by sending an event on the root window.
         See the corresponding method for the required arguments. For example,

@@ -1,8 +1,8 @@
 import time
+import typing
+
 import webcolors
 from rich.console import Console
-
-import typing
 
 if typing.TYPE_CHECKING:
     from .device import Device

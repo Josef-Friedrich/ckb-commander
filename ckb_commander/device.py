@@ -1,8 +1,10 @@
 # https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/ckbpipe.py
 
 from grp import struct_group
-from .colors import colors
 from pathlib import Path
+from typing import Literal
+
+from .colors import colors
 
 
 class Device:
@@ -55,19 +57,50 @@ class Device:
 
     @property
     def features(self) -> str:
+        """Device features."""
         return self.__read_from_file("features")
 
     @property
-    def layout(self) -> str:
-        return self.__read_from_file("layout")
-
-    @property
     def fwversion(self) -> str:
+        """Device firmware version (not present on all devices)."""
         return self.__read_from_file("fwversion")
 
     @property
+    def layout(self) -> str:
+        """Device layout, if applicable."""
+        return self.__read_from_file("layout")
+
+    @property
+    def model(self) -> str:
+        """Device description/model."""
+        return self.__read_from_file("model")
+
+    @property
+    def pollrate(self) -> str:
+        """Poll rate in milliseconds (not present on all devices)."""
+        return self.__read_from_file("pollrate")
+
+    @property
+    def productid(self) -> str:
+        """Contains the USB productID of the hardware"""
+        return self.__read_from_file("productid")
+
+    @property
+    def serial(self) -> str:
+        """Device serial number. model and serial will match the info found in ckb0/connected"""
+        return self.__read_from_file("serial")
+
+    @property
     def rgb(self) -> str:
+        """returns an ``rgb`` command equivalent to the current RGB state."""
         return self.__get_parameters("rgb")
+
+    @property
+    def hwrgb(self) -> str:
+        """Does the same thing, but retrieves the colors currently stored in
+        the hardware profile. The output will say ``hwrgb`` instead of
+        ``rgb``."""
+        return self.__get_parameters("hwrgb")
 
     def activate(self) -> None:
         """When plugged in, all devices start in hardware-controlled mode (also
@@ -93,7 +126,7 @@ class Device:
             keys_insert = keys + ":"
         self.__send_command("rgb " + keys_insert + color)
 
-    def set_color_by_command_string(self, cmds: str):
+    def set_color_by_command_string(self, cmds: str) -> None:
         for cmd in cmds.split():
             c: list[str] = cmd.split(":")
             if len(c) == 2:
@@ -104,3 +137,9 @@ class Device:
     def set_color_by_mapping(self, color_mapping: dict[str, str]) -> None:
         for (key, color) in color_mapping.items():
             self.set_color(color, key)
+
+    def turn_on_indicator(self, name: Literal["num", "caps", "scroll"]) -> None:
+        self.__send_command("ion " + name)
+
+    def turn_off_indicator(self, name: Literal["num", "caps", "scroll"]) -> None:
+        self.__send_command("ioff " + name)

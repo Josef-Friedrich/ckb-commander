@@ -1,9 +1,11 @@
 from typing import NoReturn
+
 import click
 from click import Context, Option
+
+from .colors import print_colors, set_colors
 from .device import Device
 from .workspace_indicator import monitor_workspaces
-from .colors import print_colors, set_colors
 
 pipe: Device
 
@@ -95,6 +97,7 @@ def control() -> None:
 @cli.command()
 def switch_mode() -> None:
     pipe.switch_mode(1)
+
 
 @cli.group()
 def color() -> None:

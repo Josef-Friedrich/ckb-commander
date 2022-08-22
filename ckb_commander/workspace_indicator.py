@@ -8,7 +8,9 @@ Based on https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/xws
 
 import time
 from typing import NoReturn
+
 from ewmh.ewmh import EWMH
+
 from .device import Device
 
 ewmh = EWMH()
