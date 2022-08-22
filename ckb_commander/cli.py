@@ -1,16 +1,16 @@
 from typing import NoReturn
 import click
 from click import Context, Option
-from .ckbpipe import CKBPipe
+from .device import Device
 from .workspace_indicator import monitor_workspaces
 from .colors import print_colors, set_colors
 
-pipe: CKBPipe
+pipe: Device
 
 
 def setup_pipe(ctx: Context, param: Option, path: str) -> None:
     global pipe
-    pipe = CKBPipe(path)
+    pipe = Device(path)
 
 
 def set_color(ctx: Context, param: Option, color: str) -> None:

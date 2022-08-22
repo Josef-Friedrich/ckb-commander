@@ -9,7 +9,7 @@ Based on https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/xws
 import time
 from typing import NoReturn
 from ewmh.ewmh import EWMH
-from .ckbpipe import CKBPipe
+from .device import Device
 
 ewmh = EWMH()
 
@@ -30,7 +30,7 @@ def get_current_workspace() -> int:
         return 0
 
 
-def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
+def highlight_current_workspace(pipe: Device, desktop_id: int) -> None:
     print("Highlight the workspace {}".format(desktop_id + 1))
     pipe.set_color_by_mapping(
         {key: COLORS[desktop_id == i] for (i, key) in enumerate(KEYS)}
@@ -50,7 +50,7 @@ def highlight_current_workspace(pipe: CKBPipe, desktop_id: int) -> None:
     )
 
 
-def monitor_workspaces(pipe: CKBPipe) -> NoReturn:
+def monitor_workspaces(pipe: Device) -> NoReturn:
     old_display_id: int = 0
     display_id: int = 0
 

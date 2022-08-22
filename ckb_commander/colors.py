@@ -5,7 +5,7 @@ from rich.console import Console
 import typing
 
 if typing.TYPE_CHECKING:
-    from .ckbpipe import CKBPipe
+    from .device import Device
 
 
 console: Console = Console()
@@ -24,7 +24,7 @@ def print_colors() -> None:
         print_color(color_name, rgb_value)
 
 
-def set_colors(pipe: "CKBPipe") -> None:
+def set_colors(pipe: "Device") -> None:
     for color_name, rgb_value in colors.items():
         print_color(color_name, rgb_value)
         pipe.set_color(rgb_value)
