@@ -5,11 +5,16 @@ Control your Corsair keyboard via the ckb-next-daemon.
 
 {{ cli('ckb-commander.py --help') | literal }}
 
-workspace-indicator.py
-----------------------
+{% for command in [
+                   'color',
+                   'control'
+                  ]
+%}
 
-Small script that displays on a keyboard using the ckb-next daemon which
-desktop (no 0, 1, 2, ...) you are on.
+{{ command | heading(2) }}
+
+{{ cli('ckb-commander.py --device /dev/input/ckb1 {} --help'.format(command)) | literal }}
+{% endfor %}
 
 Other pipe scripts:
 -------------------

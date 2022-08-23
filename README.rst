@@ -5,32 +5,54 @@ Control your Corsair keyboard via the ckb-next-daemon.
 
 :: 
 
-    Traceback (most recent call last):
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/bin/ckb-commander.py", line 5, in <module>
-        from ckb_commander.cli import main
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/ckb_commander/cli.py", line 8, in <module>
-        from .workspace_indicator import monitor_workspaces
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/ckb_commander/workspace_indicator.py", line 16, in <module>
-        ewmh = EWMH()
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/ewmh/ewmh.py", line 70, in __init__
-        self.display = _display or display.Display()
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/Xlib/display.py", line 89, in __init__
-        self.display = _BaseDisplay(display)
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/Xlib/display.py", line 71, in __init__
-        protocol_display.Display.__init__(self, *args, **keys)
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/Xlib/protocol/display.py", line 84, in __init__
-        name, protocol, host, displayno, screenno = connect.get_display(display)
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/Xlib/support/connect.py", line 73, in get_display
-        return mod.get_display(display)
-      File "/home/jf/repos/python/ckb_commander/.tox/docs/lib/python3.10/site-packages/Xlib/support/unix_connect.py", line 76, in get_display
-        raise error.DisplayNameError(display)
-    Xlib.error.DisplayNameError: Bad display name ""
+    Usage: ckb-commander.py [OPTIONS] COMMAND [ARGS]...
 
-workspace-indicator.py
-----------------------
+      Control the ckb-next-daemon
 
-Small script that displays on a keyboard using the ckb-next daemon which
-desktop (no 0, 1, 2, ...) you are on.
+    Options:
+      -d, --device TEXT  The path of the directory in the /dev/input folder (e. g.
+                         /dev/input/ckb1)  [required]
+      --help             Show this message and exit.
+
+    Commands:
+      color    Show informations about the available color names
+      control
+
+color
+-----
+
+:: 
+
+    Usage: ckb-commander.py color [OPTIONS] COMMAND [ARGS]...
+
+      Show informations about the available color names
+
+    Options:
+      --help  Show this message and exit.
+
+    Commands:
+      name  Show all color names
+      set   Set all keys to the same color.
+
+control
+-------
+
+:: 
+
+    Usage: ckb-commander.py control [OPTIONS]
+
+    Options:
+      -1, --activate            When plugged in, all devices start in hardware-
+                                controlled mode (also known as idle mode) and will
+                                not respond to commands. Use this option to
+                                activate the device.
+      -0, --deactivate          To put the device back into hardware mode, use
+                                this option.
+      -c, --color TEXT          Set the backlight of a single key, of selected
+                                keys or of the entire keyboard to the specified
+                                color. A color name or a RGB value in hex format.
+      -w, --indicate-workspace  Indicate the current workspace (virtual desktop).
+      --help                    Show this message and exit.
 
 Other pipe scripts:
 -------------------

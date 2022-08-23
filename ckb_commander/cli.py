@@ -7,50 +7,47 @@ from .colors import print_colors, set_colors
 from .device import Device
 from .workspace_indicator import monitor_workspaces
 
-pipe: Device
 
-
-def setup_pipe(ctx: Context, param: Option, path: str) -> None:
-    global pipe
-    pipe = Device(path)
+def setup_device(ctx: Context, param: Option, path: str) -> None:
+    device = Device(path)
+    ctx.obj = device
 
 
 def set_color(ctx: Context, param: Option, color: str) -> None:
     if not color:
         return
     print("Set color " + color)
-    pipe.set_color_by_command_string(color)
+    ctx.obj.set_color_by_command_string(color)
 
 
 def activate(ctx: Context, param: Option, flag: bool) -> None:
     if not flag:
         return
-    pipe.activate()
+    ctx.obj.activate()
 
 
 def deactivate(ctx: Context, param: Option, flag: bool) -> None:
     if not flag:
         return
-    pipe.deactivate()
+    ctx.obj.deactivate()
 
 
 def indicate_workspace(ctx: Context, param: Option, flag: bool) -> None | NoReturn:
     if not flag:
         return
-    monitor_workspaces(pipe)
+    monitor_workspaces(ctx.obj)
 
 
 @click.group()
 @click.option(
-    "--pipe",
-    "-p",
-    "pipePath",
+    "--device",
+    "-d",
     required=True,
     type=str,
-    help="The ckb pipe socket (e. g. /dev/input/ckb1/cmd)",
-    callback=setup_pipe,
+    help="The path of the directory in the /dev/input folder (e. g. /dev/input/ckb1)",
+    callback=setup_device,
 )
-def cli(pipePath: str) -> None:
+def cli(device: str) -> None:
     "Control the ckb-next-daemon"
     pass
 
@@ -98,11 +95,6 @@ def control() -> None:
     pass
 
 
-@cli.command()
-def switch_mode() -> None:
-    pipe.switch_mode(1)
-
-
 @cli.group()
 def color() -> None:
     "Show informations about the available color names"
@@ -116,9 +108,10 @@ def name() -> None:
 
 
 @color.command()
-def set() -> None:
+@click.pass_context
+def set(ctx: Context) -> None:
     "Set all keys to the same color. Loop through all colors."
-    set_colors(pipe)
+    set_colors(ctx.obj)
 
 
 def main() -> None:

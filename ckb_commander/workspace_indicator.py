@@ -1,11 +1,3 @@
-#! /usr/bin/env python
-
-# https://github.com/ckb-next/ckb-next/wiki/CKB-Daemon-Manual
-
-"""
-Based on https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/xwsmon-ckb.py
-"""
-
 import time
 from typing import NoReturn
 
@@ -59,8 +51,8 @@ def monitor_workspaces(pipe: Device) -> NoReturn:
     highlight_current_workspace(pipe, display_id)
 
     while True:
-        display_id: int = get_current_workspace()
+        display_id = get_current_workspace()
         if old_display_id != display_id:
             highlight_current_workspace(pipe, display_id)
-            old_display_id: int = display_id
+            old_display_id = display_id
         time.sleep(REFRESH_RATE)

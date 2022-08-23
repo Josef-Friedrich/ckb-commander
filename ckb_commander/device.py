@@ -1,4 +1,5 @@
 # https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/ckbpipe.py
+# https://github.com/ckb-next/ckb-next/wiki/CKB-Daemon-Manual
 
 from pathlib import Path
 from typing import Literal
