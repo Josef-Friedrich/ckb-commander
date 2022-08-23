@@ -16,7 +16,7 @@ nosetests.xml
 .pytest_cache/
 
 # Sphinx documentation
-docs/_build/
+# docs/_build/
 
 # pyenv
 # .python-version

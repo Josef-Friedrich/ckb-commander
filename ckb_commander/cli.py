@@ -59,7 +59,9 @@ def cli(pipePath: str) -> None:
 @click.option(
     "--activate",
     "-1",
-    help="When plugged in, all devices start in hardware-controlled mode (also known as idle mode) and will not respond to commands. Use this option to activate the device.",
+    help="When plugged in, all devices start in hardware-controlled mode "
+    "(also known as idle mode) and will not respond to commands. "
+    "Use this option to activate the device.",
     type=str,
     callback=activate,
     is_flag=True,
@@ -78,7 +80,9 @@ def cli(pipePath: str) -> None:
     "--color",
     "-c",
     type=str,
-    help="Set the backlight of a single key, of selected keys or of the entire keyboard to the specified color. A color name or a RGB value in hex format.",
+    help="Set the backlight of a single key, "
+    "of selected keys or of the entire keyboard to the specified color. "
+    "A color name or a RGB value in hex format.",
     callback=set_color,
     expose_value=False,
 )

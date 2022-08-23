@@ -1,6 +1,5 @@
 # https://raw.githubusercontent.com/vmedea/ckb-next-integrations/main/ckbpipe.py
 
-from grp import struct_group
 from pathlib import Path
 from typing import Literal
 
@@ -43,7 +42,7 @@ class Device:
             with open(cmd_file, "w") as file:
                 file.write(cmd + "\n")
         except IOError:
-            print(f"Error while opening or writing to pipe: " + str(cmd_file) + "\n")
+            print("Error while opening or writing to pipe: " + str(cmd_file) + "\n")
 
     def __get_parameters(self, get: str) -> str:
         self.__send_command("get :" + get)
@@ -87,7 +86,8 @@ class Device:
 
     @property
     def serial(self) -> str:
-        """Device serial number. model and serial will match the info found in ckb0/connected"""
+        """Device serial number. model and serial will match the info found in
+        ckb0/connected"""
         return self.__read_from_file("serial")
 
     @property
@@ -122,7 +122,7 @@ class Device:
             color = colors[color]
         color = color.replace("#", "")
         keys_insert = ""
-        if keys != None:
+        if keys is not None:
             keys_insert = keys + ":"
         self.__send_command("rgb " + keys_insert + color)
 
