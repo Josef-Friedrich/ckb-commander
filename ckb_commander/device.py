@@ -48,7 +48,7 @@ class Device:
     def __get_parameters(self, get: str) -> str:
         self.__send_command("get :" + get)
         notify_path = self.path / "notify0"
-        with open(notify_path) as file:
+        with open(notify_path, "r") as file:
             return file.readline()
 
     @property

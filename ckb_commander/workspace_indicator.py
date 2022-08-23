@@ -24,19 +24,19 @@ def get_current_workspace() -> int:
         return 0
 
 
-def highlight_current_workspace(pipe: Device, desktop_id: int) -> None:
+def highlight_current_workspace(device: Device, desktop_id: int) -> None:
     print("Highlight the workspace {}".format(desktop_id + 1))
-    pipe.set_color_by_mapping(
+    device.set_color_by_mapping(
         {key: COLORS[desktop_id == i] for (i, key) in enumerate(KEYS)}
     )
-    pipe.set_color_by_mapping(
+    device.set_color_by_mapping(
         {
             "del": COLORS[desktop_id != 0],
             "pgdn": COLORS[desktop_id != 3],
         }
     )
 
-    pipe.set_color_by_mapping(
+    device.set_color_by_mapping(
         {
             "lwin": COLORS[1],
             "lshift": COLORS[1],

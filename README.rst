@@ -17,6 +17,7 @@ Control your Corsair keyboard via the ckb-next-daemon.
     Commands:
       color    Show informations about the available color names
       control
+      device   Print informations about the specified device
 
 color
 -----

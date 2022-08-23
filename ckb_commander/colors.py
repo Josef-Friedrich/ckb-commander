@@ -24,8 +24,8 @@ def print_colors() -> None:
         print_color(color_name, rgb_value)
 
 
-def set_colors(pipe: "Device") -> None:
+def set_colors(device: "Device") -> None:
     for color_name, rgb_value in colors.items():
         print_color(color_name, rgb_value)
-        pipe.set_color(rgb_value)
+        device.set_color(rgb_value)
         time.sleep(1)

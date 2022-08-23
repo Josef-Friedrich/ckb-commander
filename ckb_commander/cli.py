@@ -114,5 +114,14 @@ def set(ctx: Context) -> None:
     set_colors(ctx.obj)
 
 
+@cli.command()
+@click.pass_context
+def device(ctx: Context) -> None:
+    """Print informations about the specified device"""
+
+    device = ctx.obj
+    print(device.rgb)
+
+
 def main() -> None:
     cli()

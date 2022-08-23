@@ -179,11 +179,6 @@ class EWMH:
         """
         ...
     def getCurrentDesktop(self) -> int:
-        """
-        Get the current desktop number (property _NET_CURRENT_DESKTOP)
-
-        :return: int
-        """
         ...
     def getActiveWindow(
         self,
