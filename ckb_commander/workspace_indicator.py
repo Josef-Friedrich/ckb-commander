@@ -51,6 +51,10 @@ def monitor_workspaces(pipe: Device) -> NoReturn:
     highlight_current_workspace(pipe, display_id)
 
     while True:
+        win = ewmh.getActiveWindow()
+        if win:
+            print(win.get_wm_class())
+
         display_id = get_current_workspace()
         if old_display_id != display_id:
             highlight_current_workspace(pipe, display_id)

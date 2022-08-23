@@ -11,6 +11,11 @@ See the freedesktop.org `specification
 information.
 """
 
+from typing import Tuple
+
+class Window:
+    def get_wm_class(self) -> Tuple[str, str]: ...
+
 class EWMH:
     """
     This class provides the ability to get and set properties defined by the
@@ -178,18 +183,10 @@ class EWMH:
         :return: list of [int, int]
         """
         ...
-    def getCurrentDesktop(self) -> int:
-        ...
+    def getCurrentDesktop(self) -> int: ...
     def getActiveWindow(
         self,
-    ):  # -> Resource | Drawable | Window | Pixmap | Fontable | Font | GC | Colormap | Cursor | None:
-        """
-        Get the current active (toplevel) window or None (property
-        _NET_ACTIVE_WINDOW)
-
-        :return: Window object or None
-        """
-        ...
+    ) -> Window | None: ...
     def getWorkArea(self):  # -> None:
         """
         Get the work area for each desktop (property _NET_WORKAREA) as a list
