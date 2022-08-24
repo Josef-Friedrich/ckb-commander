@@ -1,3 +1,4 @@
+import time
 from typing import NoReturn
 
 import click
@@ -5,37 +6,49 @@ from click import Context, Option
 
 from .colors import print_colors, set_colors
 from .device import Device
-from .workspace_indicator import monitor_workspaces
+from . import polling
+
+POLL_RATE: float = 0.1
 
 
-def setup_device(ctx: Context, param: Option, path: str) -> None:
+class CkbContext(Context):
+    obj: Device
+
+
+def setup_device(ctx: CkbContext, param: Option, path: str) -> None:
     device = Device(path)
     ctx.obj = device
 
 
-def set_color(ctx: Context, param: Option, color: str) -> None:
+def set_color(ctx: CkbContext, param: Option, color: str) -> None:
     if not color:
         return
     print("Set color " + color)
     ctx.obj.set_color_by_command_string(color)
 
 
-def activate(ctx: Context, param: Option, flag: bool) -> None:
+def activate(ctx: CkbContext, param: Option, flag: bool) -> None:
     if not flag:
         return
     ctx.obj.activate()
 
 
-def deactivate(ctx: Context, param: Option, flag: bool) -> None:
+def deactivate(ctx: CkbContext, param: Option, flag: bool) -> None:
     if not flag:
         return
     ctx.obj.deactivate()
 
 
-def indicate_workspace(ctx: Context, param: Option, flag: bool) -> None | NoReturn:
+def indicate_workspace(ctx: CkbContext, param: Option, flag: bool) -> None:
     if not flag:
         return
-    monitor_workspaces(ctx.obj)
+    ctx.obj.add_poller(polling.WorkspaceMonitor(ctx.obj))
+
+
+def indicate_active_window(ctx: CkbContext, param: Option, flag: bool) -> None:
+    if not flag:
+        return
+    ctx.obj.add_poller(polling.ActiveWindow(ctx.obj))
 
 
 @click.group()
@@ -91,8 +104,22 @@ def cli(device: str) -> None:
     callback=indicate_workspace,
     expose_value=False,
 )
-def control() -> None:
-    pass
+@click.option(
+    "--indicate-active-window",
+    "-a",
+    is_flag=True,
+    help="Indicate active window.",
+    callback=indicate_active_window,
+    expose_value=False,
+)
+@click.pass_context
+def control(ctx: CkbContext) -> None:
+    device = ctx.obj
+    if device.has_poller:
+        while True:
+            for poller in device.poller_collection:
+                poller.poll()
+            time.sleep(POLL_RATE)
 
 
 @cli.group()
@@ -109,14 +136,14 @@ def name() -> None:
 
 @color.command()
 @click.pass_context
-def set(ctx: Context) -> None:
+def set(ctx: CkbContext) -> None:
     "Set all keys to the same color. Loop through all colors."
     set_colors(ctx.obj)
 
 
 @cli.command()
 @click.pass_context
-def device(ctx: Context) -> None:
+def device(ctx: CkbContext) -> None:
     """Print informations about the specified device"""
 
     device = ctx.obj

@@ -2,13 +2,18 @@
 # https://github.com/ckb-next/ckb-next/wiki/CKB-Daemon-Manual
 
 from pathlib import Path
-from typing import Literal
+from typing import Literal, TYPE_CHECKING
 
 from .colors import colors
+
+if TYPE_CHECKING:
+    from .polling import Poller
 
 
 class Device:
     """A Corsair device."""
+
+    poller_collection: list["Poller"] = []
 
     def __init__(self, path: str) -> None:
         """
@@ -144,3 +149,10 @@ class Device:
 
     def turn_off_indicator(self, name: Literal["num", "caps", "scroll"]) -> None:
         self.__send_command("ioff " + name)
+
+    @property
+    def has_poller(self) -> bool:
+        return len(self.poller_collection) > 0
+
+    def add_poller(self, poller: "Poller"):
+        self.poller_collection.append(poller)
