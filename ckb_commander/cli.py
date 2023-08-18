@@ -1,5 +1,4 @@
 import time
-from typing import NoReturn
 
 import click
 from click import Context, Option
@@ -60,7 +59,7 @@ def indicate_active_window(ctx: CkbContext, param: Option, flag: bool) -> None:
     help="The path of the directory in the /dev/input folder (e. g. /dev/input/ckb1)",
     callback=setup_device,
 )
-def cli(device: str) -> None:
+def cli() -> None:
     "Control the ckb-next-daemon"
     pass
 
