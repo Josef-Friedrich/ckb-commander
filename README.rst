@@ -43,17 +43,20 @@ control
     Usage: ckb-commander.py control [OPTIONS]
 
     Options:
-      -1, --activate            When plugged in, all devices start in hardware-
-                                controlled mode (also known as idle mode) and will
-                                not respond to commands. Use this option to
-                                activate the device.
-      -0, --deactivate          To put the device back into hardware mode, use
-                                this option.
-      -c, --color TEXT          Set the backlight of a single key, of selected
-                                keys or of the entire keyboard to the specified
-                                color. A color name or a RGB value in hex format.
-      -w, --indicate-workspace  Indicate the current workspace (virtual desktop).
-      --help                    Show this message and exit.
+      -1, --activate                When plugged in, all devices start in
+                                    hardware-controlled mode (also known as idle
+                                    mode) and will not respond to commands. Use
+                                    this option to activate the device.
+      -0, --deactivate              To put the device back into hardware mode, use
+                                    this option.
+      -c, --color TEXT              Set the backlight of a single key, of selected
+                                    keys or of the entire keyboard to the
+                                    specified color. A color name or a RGB value
+                                    in hex format.
+      -w, --indicate-workspace      Indicate the current workspace (virtual
+                                    desktop).
+      -a, --indicate-active-window  Indicate active window.
+      --help                        Show this message and exit.
 
 Other pipe scripts:
 -------------------

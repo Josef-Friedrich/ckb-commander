@@ -2,7 +2,7 @@
 # https://github.com/ckb-next/ckb-next/wiki/CKB-Daemon-Manual
 
 from pathlib import Path
-from typing import Literal, TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
 from .colors import colors
 
@@ -141,7 +141,7 @@ class Device:
                 self.set_color(c[0])
 
     def set_color_by_mapping(self, color_mapping: dict[str, str]) -> None:
-        for (key, color) in color_mapping.items():
+        for key, color in color_mapping.items():
             self.set_color(color, key)
 
     def turn_on_indicator(self, name: Literal["num", "caps", "scroll"]) -> None:

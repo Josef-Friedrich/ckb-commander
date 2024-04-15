@@ -11,8 +11,7 @@ class Poller:
     def __init__(self, device: Device) -> None:
         self.device = device
 
-    def poll(self) -> None:
-        ...
+    def poll(self) -> None: ...
 
 
 class WorkspaceMonitor(Poller):
@@ -84,6 +83,7 @@ class ActiveWindow(Poller):
         win = ewmh.getActiveWindow()
         if win:
             return win.get_wm_class()[1].lower()
+        return None
 
     def __highlight_active_window(self) -> None:
         print(self.wm_class)
@@ -97,7 +97,6 @@ class ActiveWindow(Poller):
             self.device.set_color("orange", self.keys)
         else:
             self.device.set_color("black", self.keys)
-
 
     def poll(self) -> None:
         self.wm_class = self.__get_wm_class()

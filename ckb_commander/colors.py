@@ -12,7 +12,7 @@ console: Console = Console()
 colors: dict[str, str] = {**webcolors.CSS21_NAMES_TO_HEX, **webcolors.CSS3_NAMES_TO_HEX}
 
 
-def print_color(color_name: str, rgb_value: str):
+def print_color(color_name: str, rgb_value: str) -> None:
     console.print(
         "   " + rgb_value.replace("#", "") + " ", style="on " + rgb_value, end=""
     )

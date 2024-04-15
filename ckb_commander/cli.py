@@ -3,9 +3,9 @@ import time
 import click
 from click import Context, Option
 
+from . import polling
 from .colors import print_colors, set_colors
 from .device import Device
-from . import polling
 
 POLL_RATE: float = 0.1
 
